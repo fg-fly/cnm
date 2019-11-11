@@ -11,7 +11,7 @@ import io
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 def result2file(parent_dic, article_date, article_title):
     try:
-        root_dic = '/Users/Tuoxian/PycharmProjects/demo/test'
+        root_dic = '/Users/plantkon/Documents/WorkSpacePy/hdqw/test'
         target_dic = root_dic + parent_dic + article_date
         is_exists = os.path.exists(target_dic)
         filename = target_dic + article_title
@@ -59,16 +59,21 @@ def exchange_url(url):
         return _url
 
 
-def bjxw():
+def bjxw(url):
     reload(sys)  # reload 才能调用 setdefaultencoding 方法
     sys.setdefaultencoding('utf-8')
-    url = 'http://www.beijing.gov.cn/shouye/jrbj/default.htm'
+    # url = 'http://www.beijing.gov.cn/shouye/jrbj/default.htm'
+    # url = 'http://www.beijing.gov.cn/ywdt/yaowen'
     html = request_douban(url)
     soup = BeautifulSoup(html, 'lxml')
     title_list = soup.select("div.listBox > ul > li > a  ")
     article_date = soup.select("div.listBox > ul > li > span")
     for i in range(len(title_list)):
-        article_url = title_list[i].get("href")
+        if len(title_list[i].get("href")) <= 14:
+            article_url = url+title_list[i].get("href")[1:]
+        else:
+            article_url = title_list[i].get("href")
+        print article_url
         try:
             html1 = request_douban(article_url)
             result_soup = BeautifulSoup(html1, 'lxml')
@@ -102,5 +107,6 @@ def bjxw():
             print 'result_title is None!'
     print ('----------------------------------------------共获取:%d条新闻' % len(title_list))
 
-bjxw()
+bjxw('http://www.beijing.gov.cn/ywdt/yaowen')
+bjxw('http://www.beijing.gov.cn/ywdt/gqrd')
 

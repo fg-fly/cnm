@@ -8,7 +8,7 @@ import xlwt
 import sys
 import io
 
-from pathlib2 import Path
+# from pathlib2 import Path
 
 
 def page_request(url):
@@ -33,7 +33,7 @@ def select_html(url, selector, html):
 
 
 def result2file(parent_dic, article_date, article_title):
-    root_dic = '/Users/Tuoxian/PycharmProjects/demo/test'
+    root_dic = '/Users/plantkon/Documents/WorkSpacePy/hdqw/test'
     target_dic = root_dic + parent_dic + article_date
     is_exists = os.path.exists(target_dic)
     filename = target_dic + article_title

@@ -11,7 +11,7 @@ import io
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 def result2file(parent_dic, article_date, article_title):
     try:
-        root_dic = '/Users/Tuoxian/PycharmProjects/demo/test'
+        root_dic = '/Users/plantkon/Documents/WorkSpacePy/hdqw/test'
         target_dic = root_dic + parent_dic + article_date
         is_exists = os.path.exists(target_dic)
         filename = target_dic + article_title
